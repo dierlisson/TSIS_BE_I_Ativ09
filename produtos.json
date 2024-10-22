@@ -1,0 +1,58 @@
+[
+    {
+        "id_prod": "1",
+        "desc": "produto 1",
+        "data": "10\/10\/2023",
+        "preco": "101.15",
+        "validade": "10\/10\/2025"
+    },
+    {
+        "id_prod": "2",
+        "desc": "produto 2",
+        "data": "11\/10\/2023",
+        "preco": "200.20",
+        "validade": "11\/10\/2025"
+    },
+    {
+        "id_prod": "3",
+        "desc": "produto 3",
+        "data": "12\/10\/2023",
+        "preco": "52.33",
+        "validade": "12\/10\/2025"
+    },
+    {
+        "id_prod": "4",
+        "desc": "produto 4",
+        "data": "13\/10\/2023",
+        "preco": "246.65",
+        "validade": "13\/10\/2025"
+    },
+    {
+        "id_prod": "5",
+        "desc": "produto 5",
+        "data": "14\/10\/2023",
+        "preco": "89.24",
+        "validade": "14\/10\/2025"
+    },
+    {
+        "id_prod": 6,
+        "desc": "teste1",
+        "data": "12\/12\/2002",
+        "preco": "12",
+        "validade": "12\/12\/2024"
+    },
+    {
+        "id_prod": 7,
+        "desc": "1212",
+        "data": "12\/12\/1212",
+        "preco": "12",
+        "validade": "12\/12\/1212"
+    },
+    {
+        "id_prod": 8,
+        "desc": "asdasd",
+        "data": "12\/12\/1212",
+        "preco": "21",
+        "validade": "12\/12\/1212"
+    }
+]
