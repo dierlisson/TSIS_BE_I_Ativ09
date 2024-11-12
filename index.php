@@ -1,5 +1,9 @@
 <?php
 require_once 'dbLogin.php';
+if(isset($_SESSION["id_usuario"])){
+    header("Location: consultar.php");
+    exit;
+}
 // Header
 include_once 'header.php';
 ?>
