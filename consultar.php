@@ -1,16 +1,10 @@
 <?php
 
 include_once 'header.php';
-loginRequired();
-function loginRequired() {
-    global $auth;
-    if ($auth === false) {
-        header('Location: login.php');
-        exit(); // Interrompe a execução do script
-    }
-}
+require_once 'sessao.php';
 
-$arquivo = 'produtos.json';
+
+
 
 function lerArquivo($arquivo) {
     if (file_exists($arquivo)) {
