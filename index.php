@@ -4,7 +4,7 @@ if(isset($_SESSION["id_usuario"])){
     header("Location: consultar.php");
     exit;
 }
-// Header
+
 include_once 'header.php';
 ?>
 
@@ -19,11 +19,11 @@ include_once 'header.php';
                 <form action="./login.php" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email:</label>
-                        <input type="email" class="form-control form-control-sm" name="user" id="email" required>
+                        <input type="email" class="form-control form-control-sm" name="email" id="email" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Senha:</label>
-                        <input type="password" class="form-control form-control-sm" name="password" id="password" required>
+                        <input type="password" class="form-control form-control-sm" name="senha" id="senha" required>
                     </div>
                     <button type="submit" class="btn btn-secondary btn-block" name="btlogin">Login</button>
                 </form>

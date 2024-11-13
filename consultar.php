@@ -6,7 +6,7 @@ require_once 'dbProdutos.php';
 // Função para ler produtos do banco de dados
 function lerProdutos($conexao)
 {
-    $sql = "SELECT id_prod, descricao, data, preco, validade FROM produtos";
+    $sql = "SELECT idproduto, descricao, data, preco, validade FROM produtos";
     $resultado = mysqli_query($conexao, $sql);
 
     $produtos = array();
@@ -79,11 +79,11 @@ $lista = lerProdutos($connect);
             </form>
 
             <!-- Mensagem de erro, se houver -->
-            <?php if ($erro): ?>
+            <?php if ($erro){ ?>
                 <div class="alert alert-danger">
                     <?php echo $erro; ?>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </fieldset>
     </div>
 
@@ -93,6 +93,24 @@ $lista = lerProdutos($connect);
             <div class="fs-5 mb-5">
                 <h1>Lista de Produtos</h1>
             </div>
+
+
+            <form action="consultar.php" method="GET" class="mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="descricao" placeholder="Pesquisar produto por sua descrição" required>
+                    <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+                </div>
+            </form>
+
+            <div class="mt-4">
+                <?php
+                if (isset($_GET['descricao'])) {
+                    include_once 'verificar.php'; 
+                }
+                ?>
+
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -111,39 +129,20 @@ $lista = lerProdutos($connect);
                             foreach ($lista as $produto) {
                         ?>
                                 <tr>
-                                    <td><?php echo $produto["id_prod"]; ?></td>
+                                    <td><?php echo $produto["idproduto"]; ?></td>
                                     <td><?php echo $produto["descricao"]; ?></td>
                                     <td><?php echo $produto["data"]; ?></td>
                                     <td><?php echo $produto["preco"]; ?></td>
                                     <td><?php echo $produto["validade"]; ?></td>
                                     <td>
-                                        <a href='editar.php?id=<?php echo $produto["id_prod"]; ?>' class="btn btn-sm btn-primary">
+                                        <a href='editar.php?idproduto=<?php echo $produto["idproduto"]; ?>' class="btn btn-sm btn-primary">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href='excluir.php?id=<?php echo $produto["id_prod"]; ?>' class="btn btn-sm btn-danger" data-bs-toggle='modal' data-bs-target="#exampleModal<?php echo $produto["id_prod"]; ?>">
+                                        <a href='excluir.php?idproduto=<?php echo $produto["idproduto"]; ?>' class="btn btn-sm btn-danger">
                                             <i class="bi bi-trash-fill"></i>
                                         </a>
                                     </td>
                                 </tr>
-
-                                <!-- Modal de confirmação de exclusão -->
-                                <div class='modal fade' id="exampleModal<?php echo $produto["id_prod"]; ?>" tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                    <div class='modal-dialog modal-dialog-centered'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header bg-danger text-white'>
-                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>ATENÇÃO!</h1>
-                                                <button type='button' class='btn-close btn-close-white' data-bs-dismiss='modal' aria-label='Close'></button>
-                                            </div>
-                                            <div class='modal-body mb-3 mt-3'>
-                                                Tem certeza que deseja <b>EXCLUIR</b> o produto <?php echo $produto["descricao"]; ?>?
-                                            </div>
-                                            <div class='modal-footer'>
-                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Voltar</button>
-                                                <a href="excluir.php?id=<?php echo $produto["id_prod"]; ?>" type='button' class='btn btn-danger'>Sim, quero!</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             <?php
                             }
                         } else {
