@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,25 +20,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<?php
-if (isset($_POST['logout'])) {
-  $auth = false; // Redefine a variável de autenticação
-}
-?>
-
 <body>
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="img/logo.png" width="90" height="90" alt="">
-  </a>
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="img/logo.png" width="90" height="90" alt="">
+    </a>
 
-  <?php
-  global $auth;
-  if ($auth == true) { ?>
-    <form action="" method="POST" style="display:inline;">
-      <button type="submit" name="logout" class="btn btn-danger">Deslogar</button>
-    </form>
-  <?php } 
-  ?>
-</nav>
+    <?php
+
+    if (isset($_SESSION["id_usuario"])) {
+    ?>
+      <a class="btn btn-danger" href="sair.php" role="button">
+        <i class="bi bi-box-arrow-right"></i> Sair
+      </a>
+    <?php
+    }
+    ?>
+  </nav>
 </body>
