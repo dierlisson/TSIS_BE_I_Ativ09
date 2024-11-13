@@ -61,7 +61,6 @@ if (isset($_POST['btn-cadastrar'])) {
                 </div>
             </form>
 
-             <!-- Mensagem de erro, se houver -->
             <?php if ($erro){ ?>
                 <div class="alert alert-danger">
                     <?php echo $erro; ?>
