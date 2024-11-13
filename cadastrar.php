@@ -44,7 +44,7 @@ if (isset($_POST['btn-cadastrar'])) {
 
                     <div class="col-2">
                         <label for="preco" class="form-label">Preço</label>
-                        <input type="number" class="form-control" id="preco" name="txtpreco" min="1" max="120" step="0.01" required>
+                        <input type="number" class="form-control" id="preco" name="txtpreco" min="1" max="1000" step="0.01" required>
                     </div>
                     <div class="col-2">
                         <label for="dataValidade" class="form-label">Validade</label>
