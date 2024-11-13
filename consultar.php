@@ -18,94 +18,38 @@ function lerProdutos($conexao)
     return $produtos;
 }
 
-// Variável de erro para exibir mensagens de validação
-$erro = "";
-
-if (isset($_POST['btn-cadastrar'])) {
-    $descricao = $_POST['txtdescricao'];
-    $data = $_POST['txtdata'];
-    $preco = $_POST['txtpreco'];
-    $validade = $_POST['txtvalidade'];
-
-    // Validações
-    if (!filter_var($preco, FILTER_VALIDATE_FLOAT)) {
-        $erro = "O preço inserido é inválido. Insira um número válido.";
-    } elseif (!preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $data)) {
-        $erro = "A data de inclusão é inválida. Use o formato DD/MM/AAAA.";
-    } elseif (!preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $validade)) {
-        $erro = "A data de validade é inválida. Use o formato DD/MM/AAAA.";
-    } else {
-        // Insere o novo produto no banco de dados
-        $sql = "INSERT INTO produtos (descricao, data, preco, validade) VALUES ('$descricao', '$data', '$preco', '$validade')";
-        if (!mysqli_query($connect, $sql)) {
-            $erro = "Erro ao cadastrar o produto: " . mysqli_error($connect);
-        }
-    }
-}
-
-// Busca a lista de produtos do banco de dados
 $lista = lerProdutos($connect);
 ?>
 
 <div class="row mt-4">
-    <div class="col-8 container my-2">
-        <fieldset class="border p-2">
-            <legend class="control-label">Incluir produto</legend>
-            <form action="" method="POST">
-                <div class="row mx-3 g-2">
-                    <div class="col-3">
-                        <label for="produto" class="form-label">Descrição</label>
-                        <input type="text" class="form-control" id="descricao" name="txtdescricao" required>
-                    </div>
-                    <div class="col-2">
-                        <label for="dataInclusao" class="form-label">Data Inclusão</label>
-                        <input type="text" class="form-control" id="data" name="txtdata" placeholder="DD/MM/AAAA" required>
-                    </div>
 
-                    <div class="col-2">
-                        <label for="preco" class="form-label">Preço</label>
-                        <input type="number" class="form-control" id="preco" name="txtpreco" min="1" max="120" step="0.01" required>
-                    </div>
-                    <div class="col-2">
-                        <label for="dataValidade" class="form-label">Validade</label>
-                        <input type="text" class="form-control" id="validade" name="txtvalidade" placeholder="DD/MM/AAAA" required>
-                    </div>
-                </div>
-                <div class="row mx-3 my-3 g-2">
-                    <div class="col-2">
-                        <button type="submit" name="btn-cadastrar" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </div>
-            </form>
 
-            <!-- Mensagem de erro, se houver -->
-            <?php if ($erro){ ?>
-                <div class="alert alert-danger">
-                    <?php echo $erro; ?>
-                </div>
-            <?php } ?>
-        </fieldset>
-    </div>
-
-    <!-- Tela de Consulta -->
     <div class="container my-3 col-9">
         <div class="m-5">
+            <div class="fs-5 mb-5">
+                <h1>Pesquisar Produto</h1>
+            </div>
+            <div class="row mx-3 my-3 g-2">
+                <form action="consultar.php" method="GET" class="col-8 ">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="descricao" placeholder="Pesquisar produto por sua descrição" required>
+                        <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+                    </div>
+                    <div class="col-4 my-3">
+                        <a href="cadastrar.php" name="btn-voltar" class="btn btn-secondary">Cadastrar Produto</a>
+                    </div>
+                </form>
+            </div>
             <div class="fs-5 mb-5">
                 <h1>Lista de Produtos</h1>
             </div>
 
 
-            <form action="consultar.php" method="GET" class="mb-4">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="descricao" placeholder="Pesquisar produto por sua descrição" required>
-                    <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
-                </div>
-            </form>
 
             <div class="mt-4">
                 <?php
                 if (isset($_GET['descricao'])) {
-                    include_once 'verificar.php'; 
+                    include_once 'verificar.php';
                 }
                 ?>
 
